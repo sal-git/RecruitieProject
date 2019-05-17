@@ -9,6 +9,10 @@ https://docs.djangoproject.com/en/dev/ref/settings/
 """
 import environ
 from datetime import timedelta
+from dotenv import load_dotenv
+
+
+load_dotenv()
 
 ROOT_DIR = environ.Path(__file__) - 2
 
@@ -35,6 +39,7 @@ THIRD_PARTY_APPS = [
 
 LOCAL_APPS = [
     'apps.users',
+    'apps.recruitie'
 ]
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
@@ -87,7 +92,7 @@ DATABASES = {
         'NAME': env.str('POSTGRES_DB'),
         'USER': env.str('POSTGRES_USER'),
         'PASSWORD': env.str('POSTGRES_PASSWORD'),
-        'HOST': 'postgres',
+        'HOST': 'isilo.db.elephantsql.com',
         'PORT': 5432,
     },
 }

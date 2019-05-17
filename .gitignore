@@ -74,5 +74,8 @@ media/
 .vscode
 .pythonconfig
 
+#env
+.env
+
 # Venv
 venv

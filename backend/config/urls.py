@@ -12,6 +12,7 @@ urlpatterns = [
     path('logout/', logout, {'next_page': '/'}, name='logout'),
 
     path('api/', include(api.urls)),
+    # path('candidates/', include()),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
 
 ]
