@@ -19,6 +19,9 @@ Vue.config.productionTip = false
 
 require('./assets/main.scss')
 
+// var cors = require('cors');
+// Vue.use(cors());
+
 
 // Sentry for logging frontend errors
 if (process.env.NODE_ENV === 'production') {
