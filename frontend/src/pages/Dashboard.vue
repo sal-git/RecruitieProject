@@ -4,26 +4,21 @@
         <div class="columns">
             <aside class="column is-2 aside hero is-fullheight">
                 <button v-on:click="candidateLaunch" class="button is-primary">Add Candidate</button>
-                <button class="button is-primary">Add Lead</button>
+                <button v-on:click="leadLaunch" class="button is-primary">Add Lead</button>
             </aside>
             <div class="column is-4 messages hero is-fullheight">
-                <div v-for="candidate in candidates" class="card">
-                    <div class="card-content">
-                        <div class="candidate-card-header">
-                            <span class="candidate-card-from"><small>{{ candidate.location }}</small></span>
-                            <span class="candidate-card-timestamp"></span>
-                            <span class="candidate-card-attachment"><i class="fa fa-paperclip"></i></span>
-                        </div>
-                        <div class="candidate-card-subject">
-                            <span class="candidate-card-subject"><strong id="fake-subject-1">{{ candidate.name }}</strong></span>
-                        </div>
-                        <div class="candidate-card-snippet">
-                            <p id="fake-snippet-1">{{ candidate.name }}</p>
-                        </div>
-                    </div>
+                <div class="tabs is-centered">
+                    <ul>
+                        <li :class="[ activeTab === 'candidates' ? 'is-active' : '' ]"><a @click="activeTab='candidates'">Candidates</a></li>
+                        <li :class="[ activeTab === 'leads' ? 'is-active' : '' ]"><a @click="activeTab='leads'">Leads</a></li>
+                    </ul>
                 </div>
+                <LeadList v-if="activeTab ==='leads'"/>
+                <CandidateList v-if="activeTab ==='candidates'"/>
             </div>
-            <div class="column is-6 message hero is-fullheight is-hidden" id="message-pane">
+            <div class="column is-6 message hero is-fullheight">
+                <CandidateView :candidate="candidate" v-if="activeTab ==='candidates'"/>
+                <LeadView v-if="activeTab ==='leads'" />
             </div>
         </div>
 
@@ -31,11 +26,28 @@
              <div class="modal-background"></div>
             <div class="modal-card">
                 <header class="modal-card-head">
-                <p class="modal-card-title">Modal title</p>
+                <p class="modal-card-title">Add Candidate</p>
                 <button class="delete" aria-label="close"></button>
                 </header>
                 <section class="modal-card-body">
-                <!-- Content ... -->
+                    
+                </section>
+                <footer class="modal-card-foot">
+                <button class="button is-success">Save changes</button>
+                <button @click="close" class="button">Cancel</button>
+                </footer>
+            </div>
+        </div>
+
+        <div class="modal" v-bind:class="{'is-active':isActiveLead}">
+            <div class="modal-background"></div>
+            <div class="modal-card">
+                <header class="modal-card-head">
+                <p class="modal-card-title">Add Lead</p>
+                <button class="delete" aria-label="close"></button>
+                </header>
+                <section class="modal-card-body">
+                    
                 </section>
                 <footer class="modal-card-foot">
                 <button class="button is-success">Save changes</button>
@@ -50,12 +62,19 @@
 <script>
     import NavBar from '../components/NavBar.vue'
     import NewCandidateModal from '../components/NewCandidateModal.vue'
+    import LeadView from '../components/LeadView.vue'
+    import CandidateView from '../components/CandidateView.vue'
+    import LeadList from '../components/LeadList'
+    import CandidateList from '../components/CandidateList'
+    import axios from 'axios'
 
     export default {
         name: 'DashboardPage',
         data: function() {
             return {
+                activeTab: "leads",
                 isActiveCandidate: false,
+                isActiveLead: false,
                 candidates: [
                     {
                         id: 1,
@@ -75,23 +94,46 @@
                         location: "Austin, TX",
                         salary: 1140000
                     },
-                ]
+                ],
+                candidate: null
             }
         },
         methods: {
             candidateLaunch: function(){
                 this.isActiveCandidate = true;
             },
+            leadLaunch: function(){
+                this.isActiveLead = true;
+            },
             close: function() {
                 this.isActiveCandidate = false;
+                this.isActiveLead = false;
+            },
+            getCandidateInfo: function(id) {
+                console.log("retrieving candidate info")
+                
+            },
+            constructCandidateView(id){
+                axios
+                    .get('http://127.0.0.1:8000/api/candidates/'+id, { crossdomain: true })
+                    .then(response => {this.candidate = response.data})
+                console.log('constructing candidate view' + id)
             }
         },
         components: {
             NavBar,
-            NewCandidateModal
+            NewCandidateModal,
+            LeadView,
+            CandidateView,
+            LeadList,
+            CandidateList
         },
         created: function() {
-
+            // TODO proper setup
+            // axios
+            //     .get('http://127.0.0.1:8000/api/leads')
+            //     .then(response => {console.log(response.data)})
+            
         }
     }
 </script>
