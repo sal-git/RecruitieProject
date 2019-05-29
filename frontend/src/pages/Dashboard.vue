@@ -18,7 +18,7 @@
             </div>
             <div class="column is-6 message hero is-fullheight">
                 <CandidateView :candidate="candidate" v-if="activeTab ==='candidates'"/>
-                <LeadView v-if="activeTab ==='leads'" />
+                <LeadView :lead="lead" v-if="activeTab ==='leads'" />
             </div>
         </div>
 
@@ -95,7 +95,8 @@
                         salary: 1140000
                     },
                 ],
-                candidate: null
+                candidate: null,
+                lead: null
             }
         },
         methods: {
@@ -113,11 +114,18 @@
                 console.log("retrieving candidate info")
                 
             },
+            getLeadInfo: function(id){
+
+            },
             constructCandidateView(id){
                 axios
                     .get('http://127.0.0.1:8000/api/candidates/'+id, { crossdomain: true })
                     .then(response => {this.candidate = response.data})
-                console.log('constructing candidate view' + id)
+            },
+            constructLeadView(id){
+                axios
+                    .get('http://127.0.0.1:8000/api/leads/'+id, { crossdomain: true })
+                    .then(response => {this.lead = response.data})
             }
         },
         components: {

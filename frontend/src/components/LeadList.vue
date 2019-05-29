@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div v-for="lead in leads" class="card" v-bind:key="lead.id" v-on:click="getCandidateInfo(lead.id)">
+        <div v-for="lead in leads" class="card" v-bind:key="lead.id" v-on:click="getLeadInfo(lead.id)">
             <div class="card-content">
                 <div class="lead-card-header">
                     <span class="lead-card-from"><small>{{ lead.location }}</small></span>
@@ -34,6 +34,13 @@
                 .get('http://127.0.0.1:8000/api/leads', { crossdomain: true })
                 .then(response => {this.leads = response.data})
         },
+        methods: {
+            getLeadInfo: function(id) {
+                //perhaps do events, but this component will only be used in this context
+                this.$parent.constructLeadView(id);
+                
+            }
+        }
     }
 </script>
 
