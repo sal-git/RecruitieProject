@@ -1,13 +1,24 @@
 from rest_framework import serializers
 
-from .models import Candidate, Lead
+# from .models import Candidate, Lead
+from .models import * 
 
 class CandidateSerializer(serializers.ModelSerializer):
     class Meta:
         model = Candidate
-        fields = ['first_name', 'last_name', 'location', 'years_of_exp']
+        fields = ['id', 'first_name', 'last_name', 'location', 'years_of_exp']
 
 class LeadSerializer(serializers.ModelSerializer):
     class Meta:
         model = Lead
-        fields = ['title', 'desc', 'location']
+        fields = ['id', 'title', 'desc', 'location']
+
+class CandidateNoteSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = CandidateNote
+        fields = ['id', 'title', 'desc', 'location']
+
+class LeadNoteSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = LeadNote
+        fields = ['id', 'title', 'desc', 'location']
