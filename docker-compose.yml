@@ -30,6 +30,10 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data
     env_file: .env
+    # environment:
+    #   - POSTGRES_USER=ijrxbctz
+    #   - POSTGRES_PASSWORD=8VhiXk_o8aeLQUoX-yG-0j5LFpxpqIvS
+    #   - POSTGRES_DB=ijrxbctz
 
 
   mailhog:
