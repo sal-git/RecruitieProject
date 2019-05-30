@@ -76,6 +76,7 @@ media/
 
 #env
 .env
+*.env
 
 # Venv
 venv
