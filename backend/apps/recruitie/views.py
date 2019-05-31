@@ -1,8 +1,8 @@
 from django.shortcuts import render
 from rest_framework import viewsets
 
-from .serializers import CandidateSerializer, LeadSerializer
-from .models import Candidate, Lead
+from .serializers import *
+from .models import *
 
 # Create your views here.
 class CandidateViewSet(viewsets.ModelViewSet):
@@ -18,3 +18,13 @@ class LeadViewSet(viewsets.ModelViewSet):
     model = Lead
     queryset = Lead.objects.all()
     serializer_class = LeadSerializer
+
+class CandidateNoteViewSet(viewsets.ModelViewSet):
+    model = CandidateNote
+    queryset = CandidateNote.objects.all()
+    serializer_class = CandidateNoteSerializer
+
+class LeadNoteViewSet(viewsets.ModelViewSet):
+    model = LeadNote
+    queryset = LeadNote.objects.all()
+    serializer_class = LeadNoteSerializer

@@ -5,8 +5,12 @@ from . import views
 
 app_name = 'recruitie'
 router = routers.DefaultRouter()
-router.register(r'candidates', views.CandidateViewSet, 'candidates')
-router.register(r'leads', views.LeadViewSet, 'leads')
+# NOTE routes in config/api
+# router.register(r'candidatenotes', views.CandidateNoteViewSet, 'candidatenotes')
+# router.register(r'leadnotes', views.LeadNoteViewSet, 'leadnotes')
+# router.register(r'candidates', views.CandidateViewSet, 'candidates')
+# router.register(r'leads', views.LeadViewSet, 'leads')
+
 router.default_schema_renderers = [CoreJSONRenderer]
 
 urlpatterns = [

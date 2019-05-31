@@ -15,14 +15,14 @@ class Lead(models.Model):
 
 class CandidateNote(models.Model):
     id = models.AutoField(primary_key=True)
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='candidate_user', on_delete=models.CASCADE)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='candidate_user', on_delete=models.CASCADE, default=0)
     candidate = models.ForeignKey(Candidate, related_name='candidate', on_delete=models.CASCADE)
     note = models.TextField(max_length=500, blank=True, null=True)
     date = models.DateTimeField(auto_now=False, auto_now_add=False)
 
 class LeadNote(models.Model):
     id = models.AutoField(primary_key=True)
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='lead_user', on_delete=models.CASCADE)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='lead_user', on_delete=models.CASCADE, default=0)
     lead = models.ForeignKey(Lead, related_name='lead', on_delete=models.CASCADE)
     note = models.TextField(max_length=500, blank=True, null=True)
     date = models.DateTimeField(auto_now=False, auto_now_add=False)
