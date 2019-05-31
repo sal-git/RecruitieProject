@@ -12,14 +12,49 @@
                 </div>
             </div>
         </section>
+        <br>
+        <section>
+            <NoteForm />
+        </section>
+        <br>
+        <br>
+        <section>
+            <LeadNotes :rows="rowNotes" />
+        </section>
     </div>
 </template>
 
 <script>
+    import LeadNotes from './NoteList.vue';
+    import NoteForm from './notes/NoteForm.vue';
+    import axios from 'axios'
+
+
     export default {
         name: "LeadView",
-        props: ['lead']
-
+        props: ['lead', ],
+        data(){
+            return {
+                rowNotes: []
+            }
+        },
+        components: {
+            LeadNotes,
+            NoteForm
+        },
+        mounted() {
+            this.getNotes()
+            // this.$on('refresh-notes', function (child) {
+            //     console.log('getting dispatched')
+            // })
+        },
+        methods: {
+            getNotes() {
+                axios
+                    .get('/api/leads-notes', { crossdomain: true })
+                    .then(response => {this.rowNotes = response.data})
+            }
+        }
     }
 </script>
 
