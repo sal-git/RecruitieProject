@@ -60,7 +60,7 @@
 </template>
 
 <script>
-    import NavBar from '../components/NavBar.vue'
+    import NavBar from '../components/core/NavBar.vue'
     import NewCandidateModal from '../components/NewCandidateModal.vue'
     import LeadView from '../components/LeadView.vue'
     import CandidateView from '../components/CandidateView.vue'
