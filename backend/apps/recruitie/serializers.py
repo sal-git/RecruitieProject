@@ -16,9 +16,9 @@ class LeadSerializer(serializers.ModelSerializer):
 class CandidateNoteSerializer(serializers.ModelSerializer):
     class Meta:
         model = CandidateNote
-        fields = ['id', 'title', 'desc', 'location']
+        fields = ['id', 'user', 'candidate', 'note', 'date']
 
 class LeadNoteSerializer(serializers.ModelSerializer):
     class Meta:
         model = LeadNote
-        fields = ['id', 'title', 'desc', 'location']
+        fields = ['id', 'user', 'lead', 'note', 'date']
