@@ -220,9 +220,12 @@ AUTH_USER_MODEL = 'users.User'
 # ------------------------------------------------------------------------------
 REST_FRAMEWORK = {
     'UPLOADED_FILES_USE_URL': False,
+    # 'DEFAULT_AUTHENTICATION_CLASSES': [
+    #     'rest_framework.authentication.SessionAuthentication',
+    #     'rest_framework.authentication.BasicAuthentication'
+    # ],
     'DEFAULT_AUTHENTICATION_CLASSES': [
-        'rest_framework.authentication.SessionAuthentication',
-        'rest_framework.authentication.BasicAuthentication'
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
     ],
     'DEFAULT_PERMISSION_CLASSES': [],
     'DEFAULT_PARSER_CLASSES': [
