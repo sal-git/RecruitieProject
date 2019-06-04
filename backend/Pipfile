@@ -52,6 +52,7 @@ prompt_toolkit = "==1.0.15"
 Pygments = "==2.2.0"
 Werkzeug = "==0.14.1"
 python-dotenv = "*"
+djangorestframework-simplejwt = "*"
 
 [requires]
 python_version = "3.7"
